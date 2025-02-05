@@ -5,12 +5,16 @@ import shutil
 import sys
 import pygame  # For background sound
 from colorama import Fore, Style, init
+import pyttsx3  # For Text-to-Speech functionality
 
 # Initialize colorama
 init(autoreset=True)
 
 # Initialize pygame for background sound
 pygame.mixer.init()
+
+# Initialize pyttsx3 for text-to-speech functionality
+engine = pyttsx3.init()
 
 # Function to clear the terminal screen
 def clear_screen():
@@ -82,8 +86,19 @@ def fetch_wikipedia_content(title):
             print(Fore.CYAN + f"\nYou selected section: {selected_section.title}\n")
 
             # Wrap text content for readability
+            if not selected_section.text.strip():  # Check if content is empty
+                print(Fore.RED + "This section is empty or contains no readable content.")
+                continue
+
             wrapped_text = text_wrap(selected_section.text, terminal_width)
             print(Style.BRIGHT + Fore.WHITE + wrapped_text)
+            
+            # Read the section out loud using TTS
+            read_aloud(selected_section.text)
+
+            # Wait for user input before returning to the main loop
+            input("\nPress Enter to continue or 'quit' to exit...")
+
             break  # Exit the loop after displaying the selected section content
 
         except (ValueError, IndexError):
@@ -105,6 +120,18 @@ def text_wrap(text, width):
     if line:
         lines.append(line)
     return '\n'.join(lines)
+
+# Function to read the section text aloud
+def read_aloud(text):
+    engine.setProperty('rate', 150)  # Speed of speech
+    engine.setProperty('volume', 1)  # Volume (range: 0.0 to 1.0)
+    
+    # Adjust voice properties for a more natural sound (select a voice)
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id)  # Choose a more human-like voice (usually index 1)
+    
+    engine.say(text)
+    engine.runAndWait()
 
 # Display ASCII art or image in the terminal (simulating background)
 def display_background_image():
