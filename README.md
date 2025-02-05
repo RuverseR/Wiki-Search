@@ -26,3 +26,15 @@ Whether you want to quickly look up something on Wikipedia or enjoy a fun and in
 Rudransh is always eager to learn, improve, and create new things. If you have any questions or want to collaborate, feel free to reach out to him!
 
 
+Install these libaries first
+pip install pygame
+pip install wikipediaapi
+pip install time
+pip install os
+pip install shutil
+pip install colorama
+pip install sys
+
+
+
+
