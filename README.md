@@ -1,5 +1,7 @@
 ### 🚀 **Ru-Wiki_SEARCH: A CLI-Based Wikipedia Search Tool**
 
+GUI Coming Soon !
+
 **Ru-Wiki_SEARCH** is a powerful and fun Command-Line Interface (CLI) tool that allows you to search and explore Wikipedia articles directly from your terminal. Powered by the [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page), this program offers a fast, interactive way to view Wikipedia content with a cool user interface.
 
 Features:
